@@ -5,6 +5,7 @@ public class Main {
         int[] arr1 = new int[7];
         arr1 = new int[]{  4, -5, -3, 1, 2, 7, 9, 0};
         System.out.println(Arrays.toString(specialArr(arr1, 1)));
+        System.out.println(Arrays.toString(new int[]{first(arr1)}));
     }
 
     public static int[] specialArr (int[] arr, int med){
@@ -59,5 +60,22 @@ public class Main {
         }
 
         return output;
+    }
+
+    public static int first (int [] arr){
+        int lowestArray = arr[0];
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < lowestArray && arr[i] > 0){
+                lowestArray = arr[i];
+            }
+        }
+        int lowN = lowestArray;
+
+        for (int i = 0; i < lowestArray; i++) {
+            lowN = i;
+        }
+
+        return lowN;
     }
 }
