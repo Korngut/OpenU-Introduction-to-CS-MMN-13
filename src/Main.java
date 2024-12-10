@@ -22,7 +22,7 @@ public class Main {
         }
 
         int[] lessThanMid = new int[counterLessAraay + 1];
-        int[] upperThanMid  = new int[counterUpperAraay];
+        int[] upperThanMid  = new int[counterUpperAraay]; //
 
         int counterLess = 0;
         int counterUpper = 0;
