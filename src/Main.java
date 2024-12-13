@@ -63,55 +63,27 @@ public class Main {
     }
 
     public static int first (int [] arr){
-        int counterN = 0;
-
         for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > 0){
-                counterN++;
+            if (arr[i] <= arr.length && arr[i] >= 1 && arr[i] - 1 != i) {
+                switchArrays(arr, arr[i] - 1, i);
             }
         }
 
-        int[] numbersFromN = new int[counterN];
-        counterN = 0;
-
-        for (int i = 0; i < numbersFromN.length; i++) {
-            if (arr[i] > 0){
-                numbersFromN[counterN] = arr[i];
-                counterN++;
+        for (int i = 1; i <= arr.length; i++) {
+            if (arr[i - 1] != i) {
+                return i;
             }
         }
 
-        for (int i = 0; i < numbersFromN.length; i++) {
-            if (i == 0){
-                continue;
-            }
-            else{
-                if (numbersFromN[i] - 1 == numbersFromN[i]){
-                    warp(numbersFromN, numbersFromN[i], numbersFromN[i-1]);
-                }
-            }
-        }
 
-        int answar = 1;
-
-        for (int i = 0; i < numbersFromN.length; i++) {
-            if (answar == numbersFromN[i]){
-                break;
-            }
-            else {
-                answar++;
-            }
-        }
-
-        return answar;
+        return arr.length;
 
     }
 
-    public static int[] warp(int[] array, int first, int second){
+    public static void switchArrays(int[] array, int first, int second){
         int helper = array[second];
         array[second] = array[first];
         array[first] = helper;
 
-        return array;
     }
 }
