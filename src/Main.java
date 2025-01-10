@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        int[] arr1 = new int[]{1, 1, 1, 1, 10, 4, 3, 10};
+        int[] arr1 = new int[]{1, 2, 2, 1, 10, 4, 3, 10};
 
         int[][] matrix1 = {
                 {4, 5, 8, 2},
@@ -12,7 +12,6 @@ public class Main {
         };
 
         System.out.println(longestNearlyPal(arr1));;
-        System.out.println(extreme(matrix1));;
 
         System.out.println(Arrays.toString(specialArr(arr1, 1)));
         System.out.println(Arrays.toString(new int[]{first(arr1)}));
@@ -58,31 +57,33 @@ public class Main {
     }
 
 
-    public static int longestNearlyPal (int[] arr){
-        return longestNearlyPal(arr, 0, 0, false, 0);
+
+    public static int longestNearlyPal(int[] arr) {
+        return longestNearlyPal(arr, 0, arr.length - 1);
     }
-
-    private static int longestNearlyPal (int[] arr, int index1, int index2, boolean HasOmitted, int currectlength){
-        if (index1 > index2){
-            return currectlength;
+    private static int longestNearlyPal(int[] arr, int start, int end) {
+        if (start > end) {
+            return 0;
         }
-
-        if (arr[index1] == arr[index2] && !HasOmitted) {
-            return longestNearlyPal(arr, index1 + 1, index2 - 1, false, currectlength + 2);
+        if (isPalindrome(arr, start, end)) {
+            return end - start + 1;
         }
-
-        if (arr[index1] != arr[index2] && !HasOmitted) {
-            return Math.max(
-                    longestNearlyPal(arr, index1 + 1, index2, true, currectlength),
-                    longestNearlyPal(arr, index1, index2 - 1, true, currectlength)
-            );
-        } else {
-            return currectlength;
+        int removeStart = longestNearlyPal(arr, start + 1, end);
+        int removeEnd = longestNearlyPal(arr, start, end - 1);
+        return Math.max(removeStart, removeEnd);
+    }
+    private static boolean isPalindrome(int[] arr, int start, int end) {
+        if (start >= end) {
+            return true;
         }
+        if (arr[start] != arr[end]) {
+            return false;
+        }
+        return isPalindrome(arr, start + 1, end - 1);
     }
 
     public static int extreme(int [][] m){
-        return extreme(m,0,0,0);
+        return extreme(m,0,m.length-1,0);
     }
 
     public static int extreme(int [][] m, int currentX, int currentY, int currentLowVal){
